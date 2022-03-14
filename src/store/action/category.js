@@ -18,8 +18,17 @@ export const getCategory = (data = { ...defaultParams }) => {
       url: `/${data.category}/`,
       method: 'GET'
     }).then((rsp) => {
-      // console.log(JSON.stringify(rsp.data))
-      dispatch(CategorySuccess(rsp.data))
+      const arr = []
+      console.log(rsp.data.count)
+      if (rsp.data.results.length > 0) {
+        for (let index = 0; index < rsp.data.results.length; index++) {
+          arr.push({
+            ...rsp.data.results[index],
+            imgPath: `asset:/${data.category}/${index + 1}.jpg`
+          })
+        }
+      }
+      dispatch(CategorySuccess({ ...rsp.data, results: arr }))
     }).catch((err) => {
       console.log(err)
       dispatch(CategoryFail(err))

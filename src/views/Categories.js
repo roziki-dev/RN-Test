@@ -56,6 +56,8 @@ const Categories = (props) => {
         renderItem={({ item, index }) => (
           <CardDefault
             title={item?.name || item?.title}
+            source={{ uri: item?.imgPath }}
+            onPress={() => alert('hello')}
           />
         )}
         ListHeaderComponent={(
