@@ -5,13 +5,13 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { colors } from '../../styles'
 
-const HeaderDefault = ({ title, onBack, right }) => {
+const HeaderDefault = ({ title, onBack, right, containerStyle, iconBackColor }) => {
   return (
-    <View style={styles.wrapHeader}>
+    <View style={[styles.wrapHeader, containerStyle]}>
       <View style={styles.lefrigth}>
         {onBack && (
-          <TouchableOpacity>
-            <Icon name='md-arrow-back' size={24} color={colors.black} />
+          <TouchableOpacity onPress={onBack}>
+            <Icon name='md-arrow-back' size={24} color={iconBackColor || colors.black} />
           </TouchableOpacity>)
         }
       </View>
@@ -28,11 +28,14 @@ const HeaderDefault = ({ title, onBack, right }) => {
 HeaderDefault.propTypes = {
   title: PropTypes.string,
   onBack: PropTypes.func,
-  right: PropTypes.element
+  right: PropTypes.element,
+  containerStyle: PropTypes.object,
+  iconBackColor: PropTypes.string
 }
 
 HeaderDefault.defaultProps = {
   title: '',
+  iconBackColor: '',
   isFocus: false,
   onPress: () => { }
 }
