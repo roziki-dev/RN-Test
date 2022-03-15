@@ -10,7 +10,7 @@ import { colors, screen } from '../../styles'
 import request from '../../lib/axios'
 import { Romawi } from '../../tools'
 
-const HEIGHT_LAYER = screen.height * 0.2
+const HEIGHT_LAYER = screen.height * 0.16
 const DEFAULT_IMG_WIDTH = screen.width * 0.8
 
 const Starship = ({ imgUrl, detailData }) => {
@@ -121,7 +121,7 @@ const Style = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 5,
     overflow: 'hidden',
-    elevation: 4,
+    elevation: 6,
     marginTop: -(DEFAULT_IMG_WIDTH * 0.35),
     width: DEFAULT_IMG_WIDTH + 8,
     height: DEFAULT_IMG_WIDTH * 0.6 + 8
