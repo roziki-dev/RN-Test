@@ -49,7 +49,7 @@ const Categories = (props) => {
           imgUrl: item?.imgPath || ''
         })
       } else {
-        alert('Sorry!\nOpen detail only Starships')
+        alert('Sorry!\nPlease Open detail only Starships')
       }
     })
   }, [selectedCategory])
