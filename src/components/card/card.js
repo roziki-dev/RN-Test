@@ -8,12 +8,7 @@ import { bgCardSvg } from './svgCard'
 const CardDefault = ({ title, source, typeImg, imgName, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View
-        onLayout={(event) => {
-          const { width, height } = event.nativeEvent.layout
-          console.log(width, 'x', height)
-        }}
-        style={Style.cardWrap}>
+      <View style={Style.cardWrap}>
         <View style={{
           position: 'absolute',
           left: 0,
