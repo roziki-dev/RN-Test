@@ -2,17 +2,33 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Image } from 'react-native'
 import { colors, screen } from '../../styles'
+import { SvgXml } from 'react-native-svg'
+import { bgCardSvg } from './svgCard'
 
 const CardDefault = ({ title, source, typeImg, imgName, onPress }) => {
-  // const l = require('../../assets/' + typeImg + '/' + imgName)
-  // console.log(l)
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={Style.cardWrap}>
+      <View
+        onLayout={(event) => {
+          const { width, height } = event.nativeEvent.layout
+          console.log(width, 'x', height)
+        }}
+        style={Style.cardWrap}>
+        <View style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          height: (screen.width * 0.3) - 6,
+          width: (screen.width * 0.3) - 6
+        }}>
+          <SvgXml xml={bgCardSvg} width="118" height="229" />
+        </View>
+
         <View pointerEvents='box-only' style={Style.wrapImage}>
           <Image
             source={source}
-            // source={{ uri: `asset:/${typeImg}/${imgName}` }}
             style={Style.img} />
         </View>
         <View pointerEvents='box-only' style={Style.cardBody}>
@@ -42,10 +58,10 @@ const Style = StyleSheet.create({
   cardWrap: {
     width: (screen.width * 0.3) - 6,
     marginHorizontal: 6,
-    marginVertical: 10,
-    backgroundColor: colors.white,
-    borderBottomRightRadius: 20,
-    elevation: 2
+    marginVertical: 10
+    // backgroundColor: colors.white,
+    // borderBottomRightRadius: 28,
+    // elevation: 2
 
   },
   wrapImage: {
