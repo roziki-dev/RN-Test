@@ -9,15 +9,7 @@ const CardDefault = ({ title, source, typeImg, imgName, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={Style.cardWrap}>
-        <View style={{
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 0,
-          height: (screen.width * 0.3) - 6,
-          width: (screen.width * 0.3) - 6
-        }}>
+        <View style={Style.bg}>
           <SvgXml xml={bgCardSvg} width="118" height="229" />
         </View>
 
@@ -72,6 +64,15 @@ const Style = StyleSheet.create({
   cardTitle: {
     fontSize: 14,
     textAlign: 'center'
+  },
+  bg: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    height: (screen.width * 0.3) - 6,
+    width: (screen.width * 0.3) - 6
   },
   img: {
     height: '100%',
