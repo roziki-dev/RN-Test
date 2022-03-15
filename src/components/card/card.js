@@ -58,11 +58,10 @@ const Style = StyleSheet.create({
   cardWrap: {
     width: (screen.width * 0.3) - 6,
     marginHorizontal: 6,
-    marginVertical: 10
-    // backgroundColor: colors.white,
-    // borderBottomRightRadius: 28,
-    // elevation: 2
-
+    marginVertical: 10,
+    backgroundColor: colors.white,
+    borderBottomRightRadius: 12,
+    elevation: 2
   },
   wrapImage: {
     width: '100%',
