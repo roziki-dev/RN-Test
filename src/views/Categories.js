@@ -40,13 +40,17 @@ const Categories = (props) => {
 
   const openDetail = useCallback((item, index) => {
     requestAnimationFrame(() => {
-      props.navigation.navigate('detail', {
-        id: index + 1,
-        typeData: selectedCategory,
-        data: item,
-        url: selectedCategory === 'starships' ? item.url : '',
-        imgUrl: item?.imgPath || ''
-      })
+      if (selectedCategory === 'starships') {
+        props.navigation.navigate('detail', {
+          id: index + 1,
+          typeData: selectedCategory,
+          data: item,
+          url: selectedCategory === 'starships' ? item.url : '',
+          imgUrl: item?.imgPath || ''
+        })
+      } else {
+        alert('Sorry!\nOpen detail only Starships')
+      }
     })
   }, [selectedCategory])
 
