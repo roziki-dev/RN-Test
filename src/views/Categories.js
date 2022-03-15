@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   SafeAreaView,
   View,
@@ -21,8 +21,8 @@ const Categories = (props) => {
   const dispatch = useDispatch()
   const listData = useSelector(state => state.categoryList.data)
   const loadingData = useSelector(state => state.categoryList.loading)
+  const errorInfo = useSelector(state => state.categoryList.error)
   const [selectedCategory, setSelectedCategory] = useState(dataCategory[0] || '')
-  // const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     dispatch(getCategory({ category: selectedCategory }))
@@ -37,6 +37,18 @@ const Categories = (props) => {
   const data = useMemo(() => {
     return listData
   }, [listData])
+
+  const openDetail = useCallback((item, index) => {
+    requestAnimationFrame(() => {
+      props.navigation.navigate('detail', {
+        id: index + 1,
+        typeData: selectedCategory,
+        data: item,
+        url: selectedCategory === 'starships' ? item.url : '',
+        imgUrl: item?.imgPath || ''
+      })
+    })
+  }, [selectedCategory])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,7 +69,7 @@ const Categories = (props) => {
           <CardDefault
             title={item?.name || item?.title}
             source={{ uri: item?.imgPath }}
-            onPress={() => alert('hello')}
+            onPress={() => openDetail(item, index)}
           />
         )}
         ListHeaderComponent={(
@@ -88,9 +100,14 @@ const Categories = (props) => {
                 ? <View style={Style.loading}>
                   <ActivityIndicator color={colors.primary} size={48} />
                 </View>
-                : <View style={Style.empty}>
-                  <Text style={Style.emptyText}>No data</Text>
-                </View>
+                : errorInfo
+                  ? <View style={Style.empty}>
+                    <Text style={Style.WrongHead}>Something went wrong!</Text>
+                    <Text style={Style.WrongInfo}>{errorInfo}</Text>
+                  </View>
+                  : <View style={Style.empty}>
+                    <Text style={Style.emptyText}>No data</Text>
+                  </View>
             }
           </>
         }
@@ -128,6 +145,18 @@ const Style = StyleSheet.create({
     height: screen.height * 0.2,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  WrongHead: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    textAlign: 'center',
+    color: colors.textDisabled
+  },
+  WrongInfo: {
+    marginTop: 5,
+    fontSize: 17,
+    textAlign: 'center',
+    color: colors.textDisabled
   }
 })
 
