@@ -9,13 +9,13 @@ const CardDefault = ({ title, source, typeImg, imgName, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={Style.cardWrap}>
-        <View style={Style.wrapImage}>
+        <View pointerEvents='box-only' style={Style.wrapImage}>
           <Image
             source={source}
             // source={{ uri: `asset:/${typeImg}/${imgName}` }}
             style={Style.img} />
         </View>
-        <View style={Style.cardBody}>
+        <View pointerEvents='box-only' style={Style.cardBody}>
           <Text numberOfLines={2} style={Style.cardTitle}>
             {title}
           </Text>
